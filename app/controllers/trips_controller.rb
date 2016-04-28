@@ -2,10 +2,6 @@ class TripsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    x = current_user
-    puts '*' * 40
-    puts x
-    puts '*' * 40
     @trips = current_user.trips
   end
 

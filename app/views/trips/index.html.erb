@@ -1,12 +1,17 @@
 <% if current_user %>
 
-<h1>My Trips</h1>
+<div ng-app="app">
+  <div ng-controller="tripsCtrl">
 
-<% @trips.each do |trip| %>
-  <a href='trips/<%= trip.id%>'><%= trip.title %></p>
-<% end %>
-<br>
-<h3><a href = '/trips/new'>Create New Trip</a></h3>
-<h3><a href='/groups/new'>Add to Existing Trip</h3>
+    <h1>My Trips</h1>
 
-<% end %>
+    <% @trips.each do |trip| %>
+      <a href='trips/<%= trip.id%>'><%= trip.title %></p>
+    <% end %>
+    <br>
+    <h3><a href = '/trips/new'>Create New Trip</a></h3>
+    <h3><a href='/groups/new'>Add to Existing Trip</a></h3>
+
+    <% end %>
+  </div>
+</div>
