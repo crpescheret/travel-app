@@ -1,0 +1,28 @@
+<h2>Edit Accommodation</h2>
+
+<%= form_tag "/trips/#{params[:trip_id]}/accommodations", {method: :patch} do %>
+  <div>
+    <%= label_tag :name %>
+    <%= text_field_tag :name, @accommodation.name %>
+  </div>
+  <div>
+    <%= label_tag :property_type %>
+    <%= text_field_tag :property_type, @accommodation.property_type %>
+  </div>
+  <div>
+    <%= label_tag :price %>
+    <%= text_field_tag :price, @accommodation.price %>
+  </div>
+  <div>
+    <%= label_tag :address %>
+    <%= text_field_tag :address, @accommodation.address %>
+  </div>
+  <div>
+    <%= label_tag :url %>
+    <%= text_field_tag :url, @accommodation.url %>
+  </div>
+  <div>
+    <%= hidden_field_tag :trip_id, params[:trip_id] %> 
+    <%= submit_tag "Add", class: "btn btn-default" %>
+  </div>
+<% end %>

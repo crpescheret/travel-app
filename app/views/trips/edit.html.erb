@@ -1,0 +1,35 @@
+<h1>Edit Trip</h1>
+
+<%= form_tag "/trips/#{@trip.id}", {method: :patch} do %>
+  <div>
+    <%= label_tag :title %>
+    <%= text_field_tag :title, @trip.title %>
+  </div>
+  <div>
+    <%= label_tag :city %>
+    <%= text_field_tag :city, @trip.city %>
+  </div>
+  <div>
+    <%= label_tag :state %>
+    <%= text_field_tag :state, @trip.state %>
+  </div>
+  <div>
+    <%= label_tag :country %>
+    <%= text_field_tag :country, @trip.country %>
+  </div>
+  <div>
+    <%= label_tag :start_date %>
+    <%= text_field_tag :start_date, @trip.start_date %>
+  </div>
+  <div>
+    <%= label_tag :end_date %>
+    <%= text_field_tag :end_date, @trip.end_date %>
+  </div>
+  <div>
+    <%= submit_tag "Update", class: "btn btn-default" %>
+  </div>
+<% end %>
+<br>
+<% if current_user.admin %>
+<%= link_to "Delete this trip", "/trips/#{@trip.id}", method: :delete %>
+<% end %>

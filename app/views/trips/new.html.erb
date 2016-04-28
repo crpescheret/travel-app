@@ -1,0 +1,31 @@
+<h1>Create A New Trip</h1>
+
+<%= form_tag "/trips", {method: :post} do %>
+  <div>
+    <%= label_tag :title %>
+    <%= text_field_tag :title %>
+  </div>
+  <div>
+    <%= label_tag :city %>
+    <%= text_field_tag :city %>
+  </div>
+  <div>
+    <%= label_tag :state %>
+    <%= text_field_tag :state %>
+  </div>
+  <div>
+    <%= label_tag :country %>
+    <%= text_field_tag :country %>
+  </div>
+  <div>
+    <%= label_tag :start_date %>
+    <%= date_field_tag :start_date %>
+  </div>
+  <div>
+    <%= label_tag :end_date %>
+    <%= date_field_tag :end_date %>
+  </div>
+  <div>
+    <%= submit_tag "Create", class: "btn btn-default" %>
+  </div>
+<% end %>

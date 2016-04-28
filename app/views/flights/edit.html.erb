@@ -1,0 +1,27 @@
+<h1>Edit Flight</h1>
+
+<%= form_tag "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", {method: :patch} do %>
+  <div>
+    <%= label_tag :airline %>
+    <%= text_field_tag :airline, @flight.airline %>
+  </div>
+  <div>
+    <%= label_tag :flight_number %>
+    <%= text_field_tag :flight_number, @flight.flight_number %>
+  </div>
+  <div>
+    <%= label_tag :date %>
+    <%= text_field_tag :date, @flight.date %>
+  </div>
+  <div>
+    <%= label_tag :depart_time %>
+    <%= text_field_tag :depart_time, @flight.depart_time %>
+  </div>
+  <div>
+    <%= label_tag :arrive_time %>
+    <%= text_field_tag :arrive_time, @flight.arrive_time %>
+  </div>
+  <div>
+    <%= submit_tag "Update", class: "btn btn-default" %>
+  </div>
+<% end %>

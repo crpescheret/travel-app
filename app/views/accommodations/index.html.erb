@@ -1,0 +1,16 @@
+<h2><%= @trip.title%></h2>
+
+<h2>Accommodations</h2>
+
+<% @trip.accommodations.each do |accommodation| %>
+  <div>
+    <h3><%= accommodation.name %></h3> 
+    <p>Type: <%= accommodation.property_type %></p> 
+    <p>Price: <%= accommodation.price %></p> 
+    <%= link_to "View", "/trips/#{params[:trip_id]}/accommodations/#{accommodation.id}" %>
+  </div>
+<% end %>
+
+<div>
+<%= link_to "Add Accommodation", "/trips/#{params[:trip_id]}/accommodations/new" %>
+</div>

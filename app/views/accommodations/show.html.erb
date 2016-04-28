@@ -1,0 +1,17 @@
+<p><%= @accommodation.name %></p>
+<p>Price: <%= @accommodation.price %></p>
+<p>Property Type: <%= @accommodation.property_type %></p>
+<p>Address: <%= @accommodation.address %></p>
+<p>URL: <%= @accommodation.url %></p>
+
+<div><%= link_to "Edit", "/trips/#{params[:trip_id]}/accommodations/#{params[:accommodation_id]}/edit" %></div>
+<div><%= link_to "Vote", "/trips/#{params[:trip_id]}/accommodations/#{params[:accommodation_id]}?rank=1", method: :patch %></div>
+
+<% if current_user.admin? %>
+  <div>
+    <%= link_to "Finalize", "/trips/#{params[:trip_id]}/accommodations/#{params[:accommodation_id]}?confirmation=confirmed", method: :patch %>
+  </div>
+  <div>
+    <%= link_to "Delete", "/trips/#{params[:trip_id]}/accommodations/#{params[:accommodation_id]}", method: :delete %>
+  </div>
+<% end %>

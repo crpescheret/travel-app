@@ -1,0 +1,19 @@
+<h1><%= @trip.title %></h1>
+<p>City: <%= @trip.city %></p>
+<p>State: <%= @trip.state %></p>
+<p>Country: <%= @trip.country %></p>
+<p>Start Date: <%= @trip.start_date %></p>
+<p>End Date: <%= @trip.end_date %></p>
+<p>Trip ID: <%= @trip.id %></p>
+<div>
+  <a href="/trips/<%= @trip.id %>/edit">Edit This Trip</a><br>
+</div>
+<div>
+  <h3><%= link_to "Flights", "/trips/#{@trip.id}/flights" %></h3>
+</div>
+<div>
+  <h3><%= link_to "Accommodations", "/trips/#{@trip.id}/accommodations" %></h3>
+</div>
+<div>
+  <a href='/trips'>Back to My Trips</a>
+</div>

@@ -1,0 +1,12 @@
+<h1><%= @trip.title %></h1>
+
+<h2>Flights</h2>
+
+<% @trip.flights.each do |flight| %>
+  <p><%= flight.flight_number %> <%= flight.airline %></p>
+  <p><%= flight.date %></p>
+  <%= link_to "View", "/trips/#{params[:trip_id]}/flights/#{flight.id}" %>
+<% end %>
+<div>
+<%= link_to "Add New Flight", "/trips/#{params[:trip_id]}/flights/new" %>
+</div>

@@ -1,0 +1,12 @@
+<h1>Join an Existing Trip</h1>
+
+<%= form_tag "/groups", {method: :post} do %>
+  <div>
+    <%= label_tag :trip_id %>
+    <%= text_field_tag :trip_id %>
+  </div>
+  <div>
+    <%= hidden_field_tag "user_id", current_user.id %>
+    <%= submit_tag "Create", class: "btn btn-default" %>
+  </div>
+<% end %>
