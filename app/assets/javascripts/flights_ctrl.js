@@ -10,9 +10,5 @@
       });
     };
 
-    $scope.date = function() {
-      
-    }
-
   });
 })();

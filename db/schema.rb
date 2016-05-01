@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423134729) do
+ActiveRecord::Schema.define(version: 20160501194133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,13 +34,14 @@ ActiveRecord::Schema.define(version: 20160423134729) do
     t.string   "airline"
     t.string   "flight_number"
     t.date     "date"
-    t.string   "depart_time"
-    t.string   "arrive_time"
     t.string   "status"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "flight_direction"
-    t.integer  "rank",             default: 0
+    t.integer  "rank",                                     default: 0
+    t.datetime "depart_time"
+    t.datetime "arrive_time"
+    t.decimal  "price",            precision: 7, scale: 2
   end
 
   create_table "groups", force: :cascade do |t|

@@ -6,20 +6,21 @@
   <div ng-controller="flightsCtrl" ng-init="setup()">
     
   <div ng-repeat="flight in flights | filter: {tripId: <%= params[:trip_id] %>}" >
-    <p>{{ flight.airline }} Flight No. {{flight.flightNumber}} </p>
-    <p>{{ getMonth(flight.date) }}/{{ flight.date.getDay() }}/{{ flight.date.getYear() }}</p>
-    <p>{{ flight.departTime.getHours()}}:{{flight.departTime.getMinutes()}}</p>
-    <p>{{ flight.arriveTime }}</p>
+    <p ng-click="show">{{ flight.airline }} Flight No. {{flight.flightNumber}} </p>
+    <p>{{ flight.departTime | date: 'medium' }}</p>
+    <p>{{ flight.arriveTime | date: 'medium'}}</p>
+    <p>{{ flight.price }}</p>
 
-    <a href="/trips/#{params[:trip_id]}/flights/{{flight.id}}">View</a>
+    <a ng-href="/trips/<%= params[:trip_id] %>/flights/{{ flight.id }}">View</a>
+    
     <% if current_user.admin %>
     <div>
       <%= link_to "Finalize", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?confirmation=confirmed", method: :patch %>
     </div>
       <div>
       <%= link_to "Delete", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", method: :delete %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
   </div>
 
   <div>

@@ -8,4 +8,6 @@ json.array! @flights.each do |flight|
   json.flightDirection flight.flight_direction
   json.status flight.status
   json.rank flight.rank
+  json.id flight.id
+  json.price flight.price
 end
