@@ -4,24 +4,32 @@
 
 <div ng-app="app">
   <div ng-controller="flightsCtrl" ng-init="setup()">
-    
-  <div ng-repeat="flight in flights | filter: {tripId: <%= params[:trip_id] %>}" >
-    <p ng-click="show">{{ flight.airline }} Flight No. {{flight.flightNumber}} </p>
-    <p>{{ flight.departTime | date: 'medium' }}</p>
-    <p>{{ flight.arriveTime | date: 'medium'}}</p>
-    <p>{{ flight.price }}</p>
+   
+   <div class="row" ng-repeat="flight in flights | filter: {tripId: <%= params[:trip_id] %>}" >
+      <div class="col s12 m6">
+        <div class="card blue-grey darken-1"> 
+          <div class="card-content white-text" >
+            <span class="card-title" ng-click="show">{{ flight.airline }} Flight No. {{flight.flightNumber}} </span>
+            <p>{{ flight.departTime | date: 'medium' }}</p>
+            <p>{{ flight.arriveTime | date: 'medium'}}</p>
+            <p>{{ flight.price }}</p>
 
-    <a ng-href="/trips/<%= params[:trip_id] %>/flights/{{ flight.id }}">View</a>
-    
-    <% if current_user.admin %>
-    <div>
-      <%= link_to "Finalize", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?confirmation=confirmed", method: :patch %>
-    </div>
-      <div>
-      <%= link_to "Delete", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", method: :delete %>
+            <a ng-href="/trips/<%= params[:trip_id] %>/flights/{{ flight.id }}">View</a>
+            
+            <% if current_user.admin %>
+            <div>
+              <%= link_to "Finalize", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?confirmation=confirmed", method: :patch %>
+            </div>
+              <div>
+              <%= link_to "Delete", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", method: :delete %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+
+  
 
   <div>
     <%= link_to "Add New Flight", "/trips/#{params[:trip_id]}/flights/new" %>
