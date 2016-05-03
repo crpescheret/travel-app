@@ -1,31 +1,42 @@
 <h1><%= @trip.title %></h1>
 
 <h2>Flights</h2>
+<div class="ui grid">
+  <div ng-app="app">
+    <div ng-controller="flightsCtrl" ng-init="setup()">
 
-<div ng-app="app">
-  <div ng-controller="flightsCtrl" ng-init="setup()">
-    
-  <div ng-repeat="flight in flights | filter: {tripId: <%= params[:trip_id] %>}" >
-    <p ng-click="show">{{ flight.airline }} Flight No. {{flight.flightNumber}} </p>
-    <p>{{ flight.departTime | date: 'medium' }}</p>
-    <p>{{ flight.arriveTime | date: 'medium'}}</p>
-    <p>{{ flight.price }}</p>
-
-    <a ng-href="/trips/<%= params[:trip_id] %>/flights/{{ flight.id }}">View</a>
-    
-    <% if current_user.admin %>
-    <div>
-      <%= link_to "Finalize", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?confirmation=confirmed", method: :patch %>
-    </div>
-      <div>
-      <%= link_to "Delete", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", method: :delete %>
+      <div class="ui celled grid">
+         <div class="row"> 
+          <div class="four wide column" ng-repeat="flight in flights | filter: {tripId: <%= params[:trip_id] %>}" >
+            <div class="ui card">
+            <div class="content">
+              <p class="header">{{ flight.airline }} Flight No. {{flight.flightNumber}} </p>
+              <p>{{ flight.departTime | date: 'medium' }}</p>
+              <p>{{ flight.arriveTime | date: 'medium'}}</p>
+              <p>{{ flight.price }}</p>
+            </div>
+            <div class="extra-content">
+              <a ng-href="/trips/<%= params[:trip_id] %>/flights/{{ flight.id }}">View</a>
+              
+              <% if current_user.admin %>
+              <div>
+                <%= link_to "Finalize", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?confirmation=confirmed", method: :patch %>
+              </div>
+                <div>
+                <%= link_to "Delete", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", method: :delete %>
+                </div>
+              <% end %>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
       </div>
-    <% end %>
-  </div>
 
-  <div>
-    <%= link_to "Add New Flight", "/trips/#{params[:trip_id]}/flights/new" %>
-  </div>
-  
+      <div>
+        <%= link_to "Add New Flight", "/trips/#{params[:trip_id]}/flights/new" %>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
