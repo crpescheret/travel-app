@@ -1,17 +1,166 @@
-<% if current_user %>
+<div class="page-wrapper">
 
-<div ng-app="app">
-  <div ng-controller="tripsCtrl">
+  <div class="page-title pt-dark" style="background-image: url(img/page-title/blog-grid.jpg);" data-stellar-background-ratio="0.65">
+    <span class="overlay ie-gradient" style="opacity: .85;"></span>
+    <div class="container">
+        <div class="title">
+          <h1>My Trips</h1>
+          <p class="page-description">Oh the places you'll go...</p>
+        </div><!-- .title -->
+    </div><!-- .container -->
+  </div><!-- .page-title -->
 
-    <h1>My Trips</h1>
+  <div class="container">
+      <nav class="filters-bar blog-filters space-bottom-3x">
+        <div class="column">
+          <span class="label">Sort by:</span>
+          <ul class="nav-filters">
+            <li><a href="#">Ascending&nbsp;&nbsp;&uarr;</a></li>
+            <li><a href="#">Descending&nbsp;&nbsp;&darr;</a></li>
+          </ul>
+        </div>
+        <div class="column">
+          <ul class="nav-filters">
+            <li>
+              <a href="#"><i class="pe-7s-keypad"></i>Authors<span></span></a>
+              <div class="dropdown">
+                <div class="widget widget_authors">
+                  <div class="author-row">
+                    <a href="#" class="author">
+                      <div class="ava">
+                        <img src="img/widgets/authors/01.jpg" alt="Author 1">
+                      </div>
+                      <h4>James Barton</h4>
+                      <span>UX Engeneer</span>
+                    </a><!-- .author -->
+                    <a href="#" class="author">
+                      <div class="ava">
+                        <img src="img/widgets/authors/02.jpg" alt="Author 2">
+                      </div>
+                      <h4>Ketty Young</h4>
+                      <span>UX Engeneer</span>
+                    </a><!-- .author -->
+                  </div><!-- .author-row -->
+                  <div class="author-row">
+                    <a href="#" class="author">
+                      <div class="ava">
+                        <img src="img/widgets/authors/03.jpg" alt="Author 3">
+                      </div>
+                      <h4>Monica Bell</h4>
+                      <span>Journalist</span>
+                    </a><!-- .author -->
+                    <a href="#" class="author">
+                      <div class="ava">
+                        <img src="img/widgets/authors/04.jpg" alt="Author 4">
+                      </div>
+                      <h4>John Doe</h4>
+                      <span>Ruby Dev</span>
+                    </a><!-- .author -->
+                  </div><!-- .author-row -->
+                </div><!-- .widget.widget_authors -->
+              </div><!-- .dropdown -->
+            </li><!-- filter authors -->
+            <li>
+              <a href="#"><i class="pe-7s-comment"></i>Comments<span></span></a>
+              <div class="dropdown">
+                <div class="widget widget_recent_comments">
+                  <ul>
+                    <li>
+                      <a href="#">Hello World!</a>
+                      <span class="comment-meta">
+                        <span>by Jessie Pinkman</span>
+                        <span>10/02/15</span>
+                      </span>
+                    </li>
+                    <li>
+                      <a href="#">New App Theme</a>
+                      <span class="comment-meta">
+                        <span>by John Doe</span>
+                        <span>09/13/15</span>
+                      </span>
+                    </li>
+                    <li>
+                      <a href="#">Latest IT News</a>
+                      <span class="comment-meta">
+                        <span>by Susanna Davis</span>
+                        <span>08/24/15</span>
+                      </span>
+                    </li>
+                  </ul>
+                </div><!-- .widget.widget_recent_comments -->
+              </div><!-- .dropdown -->
+            </li><!-- filter recent comments -->
+            <li>
+              <a href="#"><i class="pe-7s-ticket"></i>Tags<span></span></a>
+              <div class="dropdown">
+                <div class="widget widget_tags">
+                  <a href="#" class="tag">Software<span>5</span></a>
+                  <a href="#" class="tag">PSD<span>123</span></a>
+                  <a href="#" class="tag">WordPress<span>9</span></a>
+                  <a href="#" class="tag">Apps<span>46</span></a>
+                  <a href="#" class="tag">Nature<span>77</span></a>
+                  <a href="#" class="tag">Photo<span>184</span></a>
+                  <a href="#" class="tag">Development<span>16</span></a>
+                </div><!-- .widget.widget_tags -->
+              </div><!-- .dropdown -->
+            </li><!-- filter tags -->
+            <li>
+              <a href="#"><i class="icon-list"><span></span></i>Categories<span></span></a>
+              <div class="dropdown">
+                <div class="widget widget_categories">
+                  <ul>
+                    <li><a href="#">WordPress <span class="count">6</span></a></li>
+                    <li class="current-cat"><a href="#">Mobile Applications <span class="count">4</span></a></li>
+                    <li><a href="#">Photography <span class="count">23</span></a></li>
+                    <li><a href="#">Web Design <span class="count">117</span></a></li>
+                  </ul>
+                </div><!-- .widget.widget_categories -->
+              </div><!-- .dropdown -->
+            </li><!-- filter categories -->
+          </ul>
+        </div>
+      </nav><!-- .filters-bar -->
+  </div><!-- .container -->
 
-    <% @trips.each do |trip| %>
-      <a href='trips/<%= trip.id%>'><%= trip.title %></p>
-    <% end %>
-    <br>
-    <h3><a href = '/trips/new'>Create New Trip</a></h3>
-    <h3><a href='/groups/new'>Add to Existing Trip</a></h3>
+  <% if current_user %>
 
-    <% end %>
+  <div ng-app="app">
+    <div ng-controller="tripsCtrl">
+
+    <div class="col-sm-12">
+      <div class="panel-group" id="accordion">
+
+        <% @trips.each do |trip| %>
+          <div class="panel">
+            <div class="panel-heading">
+              <a class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%= trip.title %></a>
+            </div>
+
+            <div id="collapseOne" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <p><%= trip.start_date%> - <%= trip.end_date%></p>
+                <p><%= trip.city %></p>
+                <p><%= trip.state %></p>
+                <p><%= trip.country %></p>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+      </div>
+
+    </div>
   </div>
+
+
+        <br>
+        <h3><a href = '/trips/new'>Create New Trip</a></h3>
+        <h3><a href='/groups/new'>Add to Existing Trip</a></h3>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+
 </div>
