@@ -1,19 +1,92 @@
-<h1><%= @trip.title %></h1>
-<p>City: <%= @trip.city %></p>
-<p>State: <%= @trip.state %></p>
-<p>Country: <%= @trip.country %></p>
-<p>Start Date: <%= @trip.start_date %></p>
-<p>End Date: <%= @trip.end_date %></p>
-<p>Trip ID: <%= @trip.id %></p>
-<div>
-  <a href="/trips/<%= @trip.id %>/edit">Edit This Trip</a><br>
+<div class="row">
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="/trips" class="breadcrumb">Trips</a>
+        <a href="/trips/<%= params[:id] %>!" class="breadcrumb" style="padding: 20px"><%= @trip.title %></a>
+        <!-- <a href="/trips/<%= params[:id] %>/!" class="breadcrumb">Third</a> -->
+      </div>
+    </div>
+  </nav>
+</div>  
+
+<div class="container">
+<div class="row">
+<div class="col s12 m9 l12">
+
+<div style="position: relative; height: 80px">
+  <h1 class="center-align"><%= @trip.title %></h1> 
+  <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
+      <a class="btn-floating btn-large red" href="/trips/<%= @trip.id %>/edit">
+        <i class="material-icons">mode_edit</i>
+      </a>
+  </div>
 </div>
-<div>
-  <h3><%= link_to "Flights", "/trips/#{@trip.id}/flights" %></h3>
+
+<div class="row center-align">
+  <p class="col s2">City: <%= @trip.city %></p>
+  <p class="col s2">State: <%= @trip.state %></p>
+  <p class="col s2">Country: <%= @trip.country %></p>
+  <p class="col s2">Start Date: <%= @trip.start_date %></p>
+  <p class="col s2">End Date: <%= @trip.end_date %></p>
+  <p class="col s2">Trip ID: <%= @trip.id %></p>
 </div>
-<div>
-  <h3><%= link_to "Accommodations", "/trips/#{@trip.id}/accommodations" %></h3>
+
+
+<div class="divider"></div>
+
+<div style="position: relative; height: 80px">
+  <h3 class="light center-align">Flights</h3>
+  <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
+      <a class="btn-floating btn-large waves-effect waves-light red" href="/trips/<%= @trip.id %>/flights/new">
+        <i class="material-icons center-align">add</i>
+      </a>
+    </div>
 </div>
-<div>
-  <a href='/trips'>Back to My Trips</a>
+
+<div class="row list-row">
+
+    <% @trip.flights.each do |flight| %>
+      <div class="col s12 m6 l3 deep-orange lighten-5">
+        <h5 class="card-title black-text"><%= flight.airline %> Flight No. <%= flight.flight_number %></h5> 
+        <p>Type: <%= flight.date %></p> 
+        <p>Price: <%= flight.price %></p> 
+        <div class="card-action">
+          <%= link_to "View", "/trips/#{@trip.id}/flights/#{flight.id}" %>
+        </div>
+      </div>
+    <% end %>
+
+    
+
+</div>
+
+ <div class="divider"></div>
+
+<div style="position: relative; height: 80px">
+  <h3 class="light center-align">Accommodations</h3>
+    <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
+      <a class="btn-floating btn-large waves-effect waves-light red" href="/trips/<%= @trip.id %>/accommmodations/new">
+        <i class="material-icons center-align">add</i>
+      </a>
+    </div>
+</div>
+</div>
+
+<div class="row">
+  <% @trip.accommodations.each do |accommodation| %>
+    <div class="col s3 card deep-orange lighten-5 list">
+      <h5 class="card-title black-text"><%= accommodation.name %></h5> 
+      <p>Type: <%= accommodation.property_type %></p> 
+      <p>Price: <%= accommodation.price %></p> 
+      <div class="card-action">
+        <%= link_to "View", "/trips/#{params[:trip_id]}/accommodations/#{accommodation.id}" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+</div>
+</div>
 </div>

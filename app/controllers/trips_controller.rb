@@ -29,6 +29,8 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find_by(id: params[:id])
     @group = Group.find_by(trip_id: params[:id])
+    @flight = Flight.find_by(id: params[:flight_id].to_i)
+    @accommodation = Accommodation.find_by(id: params[:accommodation_id])
     render 'show.html.erb'
   end
 
