@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row ">
   <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper blue-grey darken-1">
       <div class="col s12">
         <a href="/trips" class="breadcrumb">Trips</a>
         <a href="/trips/<%= params[:id] %>!" class="breadcrumb" style="padding: 20px"><%= @trip.title %></a>
@@ -17,7 +17,7 @@
 <div style="position: relative; height: 80px">
   <h1 class="center-align"><%= @trip.title %></h1> 
   <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
-      <a class="btn-floating btn-large red" href="/trips/<%= @trip.id %>/edit">
+      <a class="btn-floating btn-large teal accent-3" href="/trips/<%= @trip.id %>/edit">
         <i class="material-icons">mode_edit</i>
       </a>
   </div>
@@ -38,7 +38,7 @@
 <div style="position: relative; height: 80px">
   <h3 class="light center-align">Flights</h3>
   <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
-      <a class="btn-floating btn-large waves-effect waves-light red" href="/trips/<%= @trip.id %>/flights/new">
+      <a class="btn-floating btn-large waves-effect teal accent-3" href="/trips/<%= @trip.id %>/flights/new">
         <i class="material-icons center-align">add</i>
       </a>
     </div>
@@ -47,7 +47,7 @@
 <div class="row list-row">
 
     <% @trip.flights.each do |flight| %>
-      <div class="col s12 m6 l3 deep-orange lighten-5">
+      <div class="col s3 card blue-grey lighten-3">
         <h5 class="card-title black-text"><%= flight.airline %> Flight No. <%= flight.flight_number %></h5> 
         <p>Type: <%= flight.date %></p> 
         <p>Price: <%= flight.price %></p> 
@@ -57,8 +57,6 @@
       </div>
     <% end %>
 
-    
-
 </div>
 
  <div class="divider"></div>
@@ -66,7 +64,7 @@
 <div style="position: relative; height: 80px">
   <h3 class="light center-align">Accommodations</h3>
     <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
-      <a class="btn-floating btn-large waves-effect waves-light red" href="/trips/<%= @trip.id %>/accommmodations/new">
+      <a class="btn-floating btn-large waves-effect teal accent-3" href="/trips/<%= @trip.id %>/accommmodations/new">
         <i class="material-icons center-align">add</i>
       </a>
     </div>
@@ -75,18 +73,21 @@
 
 <div class="row">
   <% @trip.accommodations.each do |accommodation| %>
-    <div class="col s3 card deep-orange lighten-5 list">
+    <div class="col s3 card blue-grey lighten-3 list">
       <h5 class="card-title black-text"><%= accommodation.name %></h5> 
       <p>Type: <%= accommodation.property_type %></p> 
       <p>Price: <%= accommodation.price %></p> 
       <div class="card-action">
-        <%= link_to "View", "/trips/#{params[:trip_id]}/accommodations/#{accommodation.id}" %>
+        <%= link_to "View", "/trips/#{@trip.id}/accommodations/#{accommodation.id}" %>
       </div>
     </div>
   <% end %>
 
+          <%= link_to "My Map", "/trips/#{@trip.id}/maps" %>
+
 </div>
 
 </div>
 </div>
 </div>
+

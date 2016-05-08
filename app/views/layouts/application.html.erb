@@ -35,7 +35,6 @@
           <li><a href="/users/sign_up">Sign Up</a></li>
         <% end %>
         <% if current_user %>
-          <%= link_to "My Map", "/trips/#{params[:id]}/maps" %>
           <%= link_to "Add To Trip", '/groups/new'%>
           <%= link_to "Log Out", '/users/sign_out', method: :delete %>
         <% end %>
