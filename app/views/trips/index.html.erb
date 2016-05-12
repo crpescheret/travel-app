@@ -1,14 +1,16 @@
-<div class="container">
-<div class="row">
-<div class="col s12 m9 l12">
+<div class= "container transparent">
+  <div class="row">
+    <div class="col s12 m9 l12">
+
+
 
 <% if current_user %>
 
 <div ng-app="app">
   <div ng-controller="tripsCtrl">
     
-    <div class="row">
-      <div class="col s12">
+    <div class="row ">
+      <div class="col s12 ">
 
         <div style="position: relative; height: 80px">
           <h2 class="light center-align">My Trips</h2>
@@ -21,25 +23,22 @@
 
         <ul class="collapsible" data-collapsible="accordion">
           <% @trips.each do |trip| %>
-            <!-- <div class="row">
-              <div class="card-panel blue-grey">
-                <div class="row"> -->
             <li>
                 <div class="collapsible-header">
                       <h4 class="card-title text-darken-2"><%= trip.title %></h4>
                 </div>
                 <div class="collapsible-body">
                   <div class="row">
-                    <div class="col s3">
-                      <p><%= trip.start_date %> - <%= trip.end_date %></p>
+                    <div class="col s3 center-align">
+                      <p><%= trip.start_date.strftime("%b %d, %Y") %> - <%= trip.end_date.strftime("%b %d, %Y")  %></p>
                     </div>
-                    <div class="col s3">
+                    <div class="col s3 center-align">
                       <p><%= trip.city %></p>
                     </div>
-                    <div class="col s3">
+                    <div class="col s3 center-align">
                       <p><%= trip.country %></p>
                     </div>
-                    <div class="col s3">
+                    <div class="col s3 center-align">
                       <p><a href='trips/<%= trip.id%>'><i class="material-icons center-align">launch</i></a></p>
                     </div>
                   </div>

@@ -14,6 +14,10 @@
  *= require_self
  */
 
+.parallax-container {
+      height: 700px;
+    }
+
 .list {
   margin: 0 2em;
 
@@ -24,6 +28,7 @@
 
   margin: 40px;
   clear: both;
-
 }
+
+
 

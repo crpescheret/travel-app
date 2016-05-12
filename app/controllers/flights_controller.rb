@@ -6,6 +6,10 @@ class FlightsController < ApplicationController
     render 'index.html.erb'
   end
 
+  def new
+    @trip = Trip.find_by(id: params[:trip_id].to_i)
+  end
+
   def create
     @flight = Flight.create(
       airline: params[:airline],
@@ -18,7 +22,7 @@ class FlightsController < ApplicationController
       trip_id: params[:trip_id],
       rank: 0
     )
-    redirect_to "/trips/#{params[:trip_id]}/flights"
+    redirect_to "/trips/#{params[:trip_id]}"
   end
 
   def show
@@ -46,12 +50,12 @@ class FlightsController < ApplicationController
       trip_id: params[:trip_id],
       rank: @rank || @flight.rank
     )
-    redirect_to "/trips/#{params[:trip_id]}/flights"
+    redirect_to "/trips/#{params[:trip_id]}"
   end
 
   def destroy
     @flight = Flight.find_by(id: params[:flight_id])
     @flight.destroy
-    redirect_to "/trips/#{params[:trip_id]}/flights"
+    redirect_to "/trips/#{params[:trip_id]}"
   end
 end

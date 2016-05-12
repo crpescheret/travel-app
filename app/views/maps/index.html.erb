@@ -1,9 +1,7 @@
-<div id="floating-panel">
-      <input id="address" type="textbox" value="Sydney, NSW">
-      <input id="submit" type="button" value="Geocode">
-</div>
-
-<div id="map"></div>
-
+<div id="map" class="valign"></div>
+<script type="text/javascript">var tripId = <%= @trip.id %>;
+</script>
+<script type="text/javascript">var tripAddress = "<%= @trip.address %>";
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWODzEDsut0goHvr-1aaBXm40w0o0ojLo&callback=initMap"
   async defer></script>
