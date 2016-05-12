@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Travel App</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
-
-<h1><a href="/trips">Travel App</a></h1>
-<% if current_user == nil %>
-<%= link_to "Log In", '/users/sign_in' %>
-<%= link_to "Sign Up", '/users/sign_up' %>
-<% end %>
-<% if current_user %>
-<%= link_to "Log Out", '/users/sign_out', method: :delete %>
-<% end %>
 
 <div class="container">
   <% flash.each do |name, message| %>
@@ -26,7 +23,77 @@
   <% end %>
 </div>
 
-<%= yield %>
+</head>
 
-</body>
+
+
+      <body>
+        <header>
+
+          <nav class="white" role="navigation">
+            <div class="nav-wrapper container">
+              <a href="/trips" class="brand-logo">Travel App</a>
+              <ul class="right hide-on-med-and-down">
+                <% if current_user == nil %>
+                  <li><a href="/users/sign_in">Log In</a></li>
+                  <li><a href="/users/sign_up">Sign Up</a></li>
+                <% end %>
+                <% if current_user %>
+                  <%= link_to "Add To Trip", '/groups/new'%>
+                  <%= link_to "Log Out", '/users/sign_out', method: :delete %>
+                <% end %>
+              </ul>
+
+              <ul id="nav-mobile" class="side-nav">
+                <li><a href="#">Navbar Link</a></li>
+              </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+          </nav>
+        </header>
+
+
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="/js/materialize.js"></script>
+        <script src="/js/init.js"></script>
+
+        <%= yield %>
+        
+
+        <footer class="page-footer grey darken-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Bio</h5>
+                <p class="grey-text text-lighten-4">XXXXXXX</p>
+
+
+              </div>
+              <div class="col l3 s12">
+                <h5 class="white-text">Settings</h5>
+                <ul>
+                  <li><a class="white-text" href="#!">Link 1</a></li>
+                  <li><a class="white-text" href="#!">Link 2</a></li>
+                  <li><a class="white-text" href="#!">Link 3</a></li>
+                  <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+              <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                  <li><a class="white-text" href="#!">Link 1</a></li>
+                  <li><a class="white-text" href="#!">Link 2</a></li>
+                  <li><a class="white-text" href="#!">Link 3</a></li>
+                  <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+    
+
+      </body>
+
 </html>

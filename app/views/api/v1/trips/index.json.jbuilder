@@ -7,4 +7,5 @@ json.array! @trips.each do |trip|
   json.state trip.state
   json.country trip.country
   json.userId trip.user_id
+  json.accommodations trip.accommodations
 end
