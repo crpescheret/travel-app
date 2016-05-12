@@ -1,10 +1,15 @@
+// Place all the styles related to the maps controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
 html, body {
         height: 100%;
         margin: 0;
-        padding: 10px;
+        padding: 0;
       }
       #map {
-        height: 90%;
-        margin: 50px;
-        padding: 100px;
+        height: 70%;
+        width: 95%;
+        margin: 20px;
       }
+
+      

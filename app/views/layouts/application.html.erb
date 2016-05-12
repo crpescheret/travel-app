@@ -1,68 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Arrow</title>
 
-  <!--SEO Meta Tags-->
-  <meta name="description" content="Metheor - Multi-Purpose App Showcase Template" />
-  <meta name="keywords" content="multipurpose, app showcase, mobile, blog, business, corporate, startup, landing, shortcodes, html5, css3, jquery, js, gallery, slider, touch, creative" />
-  <meta name="author" content="Rokathemes" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Travel App</title>
 
-  <!--Mobile Specific Meta Tag-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-  <!--Favicon-->
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-  <!-- All Theme Styles including Bootstrap, Bourbon, Pixeden, etc. compiled from styles.scss-->
-  <link href="/css/styles.min.css" rel="stylesheet" media="screen">
-
-  <!--Modernizr / Detectizr-->
-  <script src="/js/vendor/modernizr.custom.js"></script>
-  
-  <!-- Page Preloader (Pace) -->
-  <script src="/js/vendor/pace.min.js"></script>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body class="is-preloader parallax">
-
-
-
-    <!-- Navbar -->
-    <!-- Remove ".navbar-fixed" class to make navigation bar scrollable with the page. Another modifier calss is ".submenu-dark" to alter submenu appearance. -->
-    <header class="navbar">
-      <div class="container">
-        <div class="inner">
-
-          <!-- Site Logo -->
-          <a href="/trips" class="site-logo">
-            <img src="#" alt="Arrow">
-          </a><!-- .site-logo -->
-
-            <!-- Main Navigation -->
-            <nav class="main-navigation">
-              <ul class="menu">
-                <li><a href="/trips/maps">Add To Trip</a></li>
-                <li><a href="/trips/maps">My Map</a></li>
-                <li>
-                  <% if current_user == nil %>
-                    <%= link_to "Log In", '/users/sign_in' %>
-                    <%= link_to "Sign Up", '/users/sign_up' %>
-                  <% end %>
-                  <% if current_user %>
-                    <%= link_to "Log Out", '/users/sign_out', method: :delete %>
-                  <% end %>
-                </li>
-              </ul><!-- .menu -->
-            </nav><!-- .main-navigation -->
-          </div><!-- .mobile-dropdown -->
-
-
 
 <div class="container">
   <% flash.each do |name, message| %>
@@ -73,19 +28,80 @@
   <% end %>
 </div>
 
-<%= yield %>
+</head>
 
 
-  <script src="js/vendor/jquery-2.1.4.min.js"></script>
-  <script src="js/vendor/bootstrap.min.js"></script>
-  <script src="js/vendor/placeholder.js"></script>
-  <script src="js/vendor/smoothscroll.js"></script>
-  <script src="js/vendor/jquery.stellar.min.js"></script>
-  <script src="js/vendor/velocity.min.js"></script>
-  <script src="js/vendor/jquery.parallax.min.js"></script>
-  <script src="js/vendor/magnific-popup.min.js"></script>
-  <script src="js/vendor/owl.carousel.min.js"></script>
-  <script src="js/scripts.js"></script>
+
+      <body>
+        <header>
+
+          <nav class="white" role="navigation">
+            <div class="nav-wrapper container">
+              <a href="/trips" class="brand-logo">Travel App</a>
+              <ul class="right hide-on-med-and-down">
+                <% if current_user == nil %>
+                  <li><a href="/users/sign_in">Log In</a></li>
+                  <li><a href="/users/sign_up">Sign Up</a></li>
+                <% end %>
+                <% if current_user %>
+                  <%= link_to "Add To Trip", '/groups/new'%>
+                  <%= link_to "Log Out", '/users/sign_out', method: :delete %>
+                <% end %>
+              </ul>
+
+              <ul id="nav-mobile" class="side-nav">
+                <li><a href="#">Navbar Link</a></li>
+              </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+          </nav>
+        </header>
+
+
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="/js/materialize.js"></script>
+        <script src="/js/init.js"></script>
+
+        <%= yield %>
+        
+
+        <footer class="page-footer grey darken-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Bio</h5>
+                <p class="grey-text text-lighten-4">XXXXXXX</p>
+
+
+              </div>
+              <div class="col l3 s12">
+                <h5 class="white-text">Settings</h5>
+                <ul>
+                  <li><a class="white-text" href="#!">Link 1</a></li>
+                  <li><a class="white-text" href="#!">Link 2</a></li>
+                  <li><a class="white-text" href="#!">Link 3</a></li>
+                  <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+              <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                  <li><a class="white-text" href="#!">Link 1</a></li>
+                  <li><a class="white-text" href="#!">Link 2</a></li>
+                  <li><a class="white-text" href="#!">Link 3</a></li>
+                  <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+    
+
+      </body>
+
 
 </body>
+
 </html>

@@ -34,7 +34,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/trips' => 'trips#index'
+      get '/trips/:id' => 'trips#show'
+
       get '/flights' => 'flights#index'
+      get '/flights/:id' => 'flights#show'
+      post '/flights/search' => 'flights#search'
+      post '/flights' => 'flights#create'
+
+      get '/accommodations' => 'accommodations#index'
+      get '/accommodations/:id' => 'accommodations#show'
     end
   end
 end
