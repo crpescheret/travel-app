@@ -1,10 +1,7 @@
-10.times do
-  Accommodation.create(
-                :trip_id => 3,
-                :name => Faker::Company.name,
-                :price => Faker::Number.number(3),
-                :address => Faker::Address.street_address,
-                :url => Faker::Internet.url,
-                :property_type => Faker::Hipster.word
-                )
+5.times do
+  Comment.create(
+                  :trip_id => 1,
+                  :user_id => 2,
+                  :text => Faker::Hipster.word
+                  )
 end

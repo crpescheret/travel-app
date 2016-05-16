@@ -17,7 +17,7 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body class="is-preloader parallax">
+<body>
 
 <div class="container">
   <% flash.each do |name, message| %>
@@ -30,78 +30,79 @@
 
 </head>
 
+<body>
+  <header>
+
+    <nav class="grey darken-3" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="/trips" class="brand-logo white-text">Travel App</a>
+        <ul class="right hide-on-med-and-down">
+          <% if current_user == nil %>
+            <li><a href="/users/sign_in" class="white-text">Log In</a></li>
+            <li><a href="/users/sign_up" class="white-text">Sign Up</a></li>
+          <% end %>
+          <% if current_user %>
+            <li><a href="/groups/new" class="white-text">Add to Trip</a></li>
+            <li><a href="/trips/<%=params[:id]%>/comments" class="white-text">Chat</a></li>
+            <li><a href="/trips/<%=params[:id]%>/itinerary" class="white-text">Itinerary</a></li>
+            <li><a href="/users/sign_out" method="delete" class="white-text">Log Out</a></li>
+          <% end %>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Navbar Link</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </header>
+  <main>
+   <div class="container">
+    <div class="row">
+      <div class="col s12 m9 l12">
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/js/materialize.js"></script>
+    <script src="/js/init.js"></script>
+
+    <%= yield %>
 
 
-      <body>
-        <header>
-
-          <nav class="white" role="navigation">
-            <div class="nav-wrapper container">
-              <a href="/trips" class="brand-logo">Travel App</a>
-              <ul class="right hide-on-med-and-down">
-                <% if current_user == nil %>
-                  <li><a href="/users/sign_in">Log In</a></li>
-                  <li><a href="/users/sign_up">Sign Up</a></li>
-                <% end %>
-                <% if current_user %>
-                  <%= link_to "Add To Trip", '/groups/new'%>
-                  <%= link_to "Log Out", '/users/sign_out', method: :delete %>
-                <% end %>
-              </ul>
-
-              <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Navbar Link</a></li>
-              </ul>
-              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-            </div>
-          </nav>
-        </header>
+      </div>
+    </div>
+   </div>
+  </main>
+  <footer class="page-footer grey darken-3">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Bio</h5>
+          <p class="grey-text text-lighten-4">XXXXXXX</p>
 
 
-        <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="/js/materialize.js"></script>
-        <script src="/js/init.js"></script>
-
-        <%= yield %>
-        
-
-        <footer class="page-footer grey darken-3">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Bio</h5>
-                <p class="grey-text text-lighten-4">XXXXXXX</p>
-
-
-              </div>
-              <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                  <li><a class="white-text" href="#!">Link 1</a></li>
-                  <li><a class="white-text" href="#!">Link 2</a></li>
-                  <li><a class="white-text" href="#!">Link 3</a></li>
-                  <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-              <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                  <li><a class="white-text" href="#!">Link 1</a></li>
-                  <li><a class="white-text" href="#!">Link 2</a></li>
-                  <li><a class="white-text" href="#!">Link 3</a></li>
-                  <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </footer>
-
-    
-
-      </body>
-
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
 
-</html>

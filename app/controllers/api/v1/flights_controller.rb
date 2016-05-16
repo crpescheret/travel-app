@@ -5,7 +5,11 @@ class Api::V1::FlightsController < ApplicationController
   end
 
   def show
-    @flights = Flight.where(trip_id: params[:id])
+    if Flight.where(trip_id: params[:id], status: "confirmed").length > 0 
+      @flights = Flight.where(trip_id: params[:id], status: "confirmed")
+    else
+      @flights = Flight.where(trip_id: params[:id])
+    end
     render "show.json.jbuilder"
   end
 
@@ -40,6 +44,9 @@ class Api::V1::FlightsController < ApplicationController
       depart_time: params[:departureTime],
       arrive_time: params[:arrivalTime],
       price: params[:price],
+      flight_direction: params[:flightDirecton],
+      arrive_airport: params[:arriveAirport],
+      depart_airport: params[:departAirport],
       status: "pending",
       rank: 0
     )

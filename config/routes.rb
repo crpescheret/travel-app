@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/trips' => 'trips#create'
   get '/trips/:id' => 'trips#show'
   get '/trips/:id/edit' => 'trips#edit'
+  get '/trips/:id/itinerary' => 'trips#itinerary'
   patch '/trips/:id' => 'trips#update'
   delete '/trips/:id' => 'trips#destroy'
 
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
 
   get '/trips/:trip_id/maps' => 'maps#index'
 
+  get '/trips/:trip_id/comments' => 'comments#index'
+
   get '/groups/new' => 'groups#new'
   post '/groups' => 'groups#create'
 
@@ -43,6 +46,9 @@ Rails.application.routes.draw do
 
       get '/accommodations' => 'accommodations#index'
       get '/accommodations/:id' => 'accommodations#show'
+
+      get 'trips/:trip_id/comments' => 'comments#index'
+      post 'trips/:trip_id/comments' => 'comments#create'
     end
   end
 end

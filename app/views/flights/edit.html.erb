@@ -1,7 +1,3 @@
-<div class="container">
-<div class="row">
-<div class="col s12 m9 l12">
-
 <h1>Edit Flight</h1>
 
 <%= form_tag "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", {method: :patch} do %>
@@ -29,6 +25,3 @@
     <%= submit_tag "Update", class: "btn btn-default" %>
   </div>
 <% end %>
-</div>
-</div>
-</div>

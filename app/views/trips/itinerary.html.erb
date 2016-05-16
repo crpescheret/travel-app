@@ -1,0 +1,40 @@
+<h1>Itinerary</h1>
+
+<% if @departing_flight == nil || @arriving_flight == nil || @accommodation == nil %>
+  <p>Your trip itinerary will appear here once you have finalized your flights and accommodations.</p>
+<% end %>
+
+<% if @departing_flight != nil && @arriving_flight != nil && @accommodation != nil %>
+<div class="row">
+  <div class="col s12">
+
+    <div class="card blue-grey lighten-3">
+      <div class="card-content black-text">
+        <span class="card-title black-text">Departure Flight</span>
+        <p><%= @departing_flight.airline %> Flight No. <%= @departing_flight.flight_number %></p>
+        <p>Departing: <%= @departing_flight.depart_time.strftime("%b %e, %Y %l:%M %p") %> </p>
+        <p>Arriving: <%= @departing_flight.arrive_time.strftime("%b %e, %Y %l:%M %p") %> </p>
+      </div>
+    </div>
+
+    <div class="card blue-grey lighten-3">
+      <div class="card-content black-text">
+        <span class="card-title black-text">Accommodations</span>
+        <p><%= @accommodation.name %></p>
+        <p>Address: <%= @accommodation.address %> </p>
+        <p>Website: <a href= "<%=@accommodation.url%>"><%=@accommodation.url%></a></p>
+        <p>Notes: </p>
+      </div>
+    </div>
+
+    <div class="card blue-grey lighten-3">
+      <div class="card-content black-text">
+        <span class="card-title black-text">Return Flight</span>
+        <p><%= @arriving_flight.airline %> Flight No. <%= @arriving_flight.flight_number %></p>
+        <p>Departing: <%= @arriving_flight.depart_time.strftime("%b %e, %Y %l:%M %p") %> </p>
+        <p>Arriving: <%= @arriving_flight.arrive_time.strftime("%b %e, %Y %l:%M %p") %> </p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

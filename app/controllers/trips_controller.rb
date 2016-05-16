@@ -34,6 +34,14 @@ class TripsController < ApplicationController
     render 'show.html.erb'
   end
 
+  def itinerary
+    @trip = Trip.find_by(id: params[:id])
+    @departing_flight = Flight.find_by(trip_id: @trip.id, status: "confirmed", flight_direction: "departing")
+    @arriving_flight = Flight.find_by(trip_id: params[:id], status: "confirmed", flight_direction: "arriving")
+    @accommodation = Accommodation.find_by(trip_id: params[:id], status: "confirmed")
+    render "itinerary.html.erb"
+  end 
+
   def edit
     if current_user.admin?
       @trip = Trip.find_by(id: params[:id])

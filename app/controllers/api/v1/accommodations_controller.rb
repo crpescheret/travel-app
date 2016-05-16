@@ -5,7 +5,11 @@ class Api::V1::AccommodationsController < ApplicationController
   end
 
   def show
-    @accommodations = Accommodation.where(trip_id: params[:id])
+    if Accommodation.where(trip_id: params[:id], status: "confirmed").length > 0 
+      @accommodations = Accommodation.where(trip_id: params[:id], status: "confirmed")
+    else
+      @accommodations = Accommodation.where(trip_id: params[:id])
+    end
     render "show.json.jbuilder"
   end
 end

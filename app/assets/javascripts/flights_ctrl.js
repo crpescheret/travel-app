@@ -27,15 +27,18 @@
       inputOption.detailsVisible = !inputOption.detailsVisible;
     };
 
-    $scope.addFlight = function(inputAirline, inputFlightNumber, inputDeparture, inputArrival, inputPrice) {
-      console.log(inputAirline, inputFlightNumber, inputDeparture, inputArrival, inputPrice);
+    $scope.addFlight = function(inputAirline, inputFlightNumber, inputDeparture, inputArrival, inputPrice, inputOrigin, inputDestination, inputFlightDirection) {
+      console.log(inputAirline, inputFlightNumber, inputDeparture, inputArrival, inputPrice, inputFlightDirection);
       var newFlight = {
         tripId: tripId,
         airline: inputAirline,
         flightNumber: inputFlightNumber,
         departureTime: inputDeparture,
         arrivalTime: inputArrival,
-        price: inputPrice
+        price: inputPrice,
+        departAirport: inputOrigin,
+        arriveAirport: inputDestination,
+        flightDirection: inputFlightDirection
       };
       $http.post('/api/v1/flights', newFlight).then(function(response) {
         console.log(response);

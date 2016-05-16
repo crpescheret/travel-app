@@ -1,7 +1,6 @@
-<div id="map" class="valign"></div>
-<script type="text/javascript">var tripId = <%= @trip.id %>;
-</script>
-<script type="text/javascript">var tripAddress = "<%= @trip.address %>";
-</script>
+<div id="map" style="width: 95%; height: 80%; margin: 30px" class="center-align"></div>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWODzEDsut0goHvr-1aaBXm40w0o0ojLo&callback=initMap"
   async defer></script>
+<script type="text/javascript">var tripId = <%= @trip.id %>;
+</script>

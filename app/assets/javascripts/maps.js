@@ -5,61 +5,43 @@ function initMap() {
       return response.json();
     }).then(function(places) {
       console.log(places.accommodations);
-      console.log(places.flights);
 
+      var resultsMap = new google.maps.Map(document.getElementById('map'));
       var geocoder = new google.maps.Geocoder();
+      var bounds = new google.maps.LatLngBounds();
+      var infowindow = new google.maps.InfoWindow();
+      var markers = [];
 
       places.accommodations.forEach(function(accommodation) {
         console.log(accommodation.address);
 
         geocoder.geocode({address: accommodation.address}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);
+            resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
-              map: map,
+              map: resultsMap,
               position: results[0].geometry.location
             });
+            marker.addListener('click', function() {
+              infowindow.setContent(
+                '<h4>' + accommodation.name + '</h4>' +
+                '<p>' + accommodation.address + '</p>' +
+                '<a href="/trips/' + tripId + '/accommodations/' + accommodation.id + '">View more</a>'
+              );
+              infowindow.open(resultsMap, marker);
+            });
+            markers.push(marker);
+            for (var i = 0;i < markers.length; i++) {
+              bounds.extend(markers[i].getPosition());
+            }
+            resultsMap.fitBounds(bounds);
           } else {
             console.log("Geocode was not successful: " + status);
           }
         });
       });
-
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
-        center: geocoder.geocode({address: tripAddress})
-      });
-
-      // var map = new google.maps.Map(document.getElementById('map'), {
-      //     zoom: 3,
-      //     center: {lat: 0, lng: -180},
-      //     mapTypeId: google.maps.MapTypeId.TERRAIN
-      //   });
-
-      //   var flightPlanCoordinates = [
-      //     {lat: 37.772, lng: -122.214},
-      //     {lat: 21.291, lng: -157.821},
-      //     {lat: -18.142, lng: 178.431},
-      //     {lat: -27.467, lng: 153.027}
-      //   ];
-      //   var flightPath = new google.maps.Polyline({
-      //     path: flightPlanCoordinates,
-      //     geodesic: true,
-      //     strokeColor: '#FF0000',
-      //     strokeOpacity: 1.0,
-      //     strokeWeight: 2
-      //   });
-
-      //   flightPath.setMap(map);
            
     });
-
-  
-
-  // var places = [
-  //   {address: "Chicago, IL", title: "Chicago", description: "Windy city"},
-  //   {address: "1136 West Wellington, Chicago, IL", title: "Chicago", description: "Apartment"}
-  // ];
 
 }
 
