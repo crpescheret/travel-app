@@ -3,11 +3,11 @@
 
       <div ng-app="app">
         <div ng-controller="flightsCtrl" ng-init="setup()">
-          <h1>Add New Flight</h1>
+          <h1 class="center-align">Add New Flight</h1>
 
           <ul class="collapsible" data-collapsible="accordion">
             <li>
-              <div class="collapsible-header"><i class="material-icons">search</i>Search for Flights</div>
+              <div class="collapsible-header"><i class="medium material-icons">search</i><h4 class="light">Search for Flights</h4></div>
                <div class="collapsible-body">
                   <div class="container">
                     <div class="row">
@@ -28,7 +28,7 @@
                         </div>
                         <br>
                         <div>
-                          <input type="submit" class="btn btn-default" value="Search" ng-click="searchFlights(origin, destination, date)"></input>
+                          <input type="submit" class="btn btn-default" value="{{ searchButtonText }}" ng-click="searchFlights(origin, destination, date)"></input>
                         </div>
                   </form>
                   <br>
@@ -57,17 +57,16 @@
                         </div>
                         <div class="row">
                           <div class="col s6 center-align">
-                            <input ng-model="flightDirection" name="flightDirection" type="radio" id="departing" value="departing" class="with-gap"/>
-                            <label for="departing">Departure Flight</label>
+                            <input ng-model="result.flightDirection" name="{{result.$$hashKey}}-flightDirection" type="radio" id="{{result.$$hashKey}}-departure" value="Departure" class="with-gap"/>
+                            <label for="{{result.$$hashKey}}-departure">Departure Flight</label>
                           </div>
                           <div class="col s6 center-align">
-                            <input ng-model="flightDirection"name="flightDirection" type="radio" id="arriving" value="arriving" class="with-gap"/>
-                            <label for="arriving">Return Flight</label>
+                            <input ng-model="result.flightDirection" name="{{result.$$hashKey}}-flightDirection" type="radio" id="{{result.$$hashKey}}-return" value="Return" class="with-gap"/>
+                            <label for="{{result.$$hashKey}}-return">Return Flight</label>
                           </div>
                         </div>
                         <div class="row left-align">
-                          <a href="/trips/<%=params[:trip_id]%>"
-                             class="waves-effect waves-light btn left-align" 
+                          <a class="waves-effect waves-light btn left-align" 
                              ng-click="addFlight(result.carrier, 
                                                  result.flightNumber, 
                                                  result.departureTime, 
@@ -75,53 +74,16 @@
                                                  result.price,
                                                  origin,
                                                  destination,
-                                                 flightDirection)">Add</a>
+                                                 result.flightDirection)">Add</a>
                         </div>
                         <div class="divider">
                       </div>
-
-                      <!-- <table class="highlight">
-                      <thead class="center-align">
-                        <th>Airline</th>
-                        <th>Flight No.</th>
-                        <th>Departure Time</th>
-                        <th>Arrival Time</th>
-                        <th>Price</th>
-                        <th>Flight Direction</th>
-                        <th>Add</th>
-                      </thead>
-                      <tbody ng-repeat="result in results"> -->
-                       <!--  <tr>
-                          <td>{{ result.carrier}}</td>
-                          <td>{{ result.flightNumber}}</td>
-                          <td>{{ result.departureTime | date: 'medium' }}</td>
-                          <td>{{ result.arrivalTime | date: 'medium' }}</td>
-                          <td>{{ result.price }}</td>
-                          <td>                            
-                            <div>
-                              <input ng-model="flightDirection" name="flightDirection" type="radio" id="departing" value="departing" class="with-gap"/>
-                              <label for="departing">Departure Flight</label>
-                              <input ng-model="flightDirection"name="flightDirection" type="radio" id="arriving" value="arriving" class="with-gap"/>
-                              <label for="arriving">Return Flight</label>
-                            </div>
-                          </td>
-                          <td><a href="/trips/<%=params[:trip_id]%>/flights"
-                             class="waves-effect waves-light btn" 
-                             ng-click="addFlight(result.carrier, 
-                                                 result.flightNumber, 
-                                                 result.departureTime, 
-                                                 result.arrivalTime, 
-                                                 result.price,
-                                                 flightDirection)">Add</a></td>
-                        </tr>
-                      </tbody>
-                    </table> -->
                   </div>
                 </div>
             </li>
 
             <li>
-              <div class="collapsible-header"><i class="material-icons">mode_edit</i>Add New Flight</div>
+              <div class="collapsible-header"><i class="medium material-icons">mode_edit</i><h4 class="light">Add New Flight</h4></div>
                 <div class="collapsible-body container" style="margin-top: 20px; margin-bottom: 50px">
                   
                   <%= form_tag "/trips/#{params[:trip_id]}/flights", {method: :post} do %>
@@ -143,24 +105,25 @@
                     </div>
                     <div>
                       <%= label_tag :depart_time, "Departure Time" %>
-                      <%= text_field_tag :depart_time %>
+                      <%= datetime_local_field_tag :flight, :depart_time %>
                     </div>
                     <div>
                       <%= label_tag :arrive_time, "Arrival Time" %>
-                      <%= text_field_tag :arrive_time %>
+                      <%= datetime_local_field_tag :flight, :arrive_time %>
                     </div>
                     <div>
                       <%= label_tag :price %>
                       <%= text_field_tag :price %>
                     </div>
                     <div>
-                      <%= radio_button_tag(:flight_direction, "departing") %>
-                      <%= label_tag(:flight_direction_departing, "Departure Flight") %>
+                      <%= radio_button_tag(:flight_direction, "Departure", false ,class: "with-gap") %>
+                      <%= label_tag(:flight_direction_Departure, "Departure Flight") %>
                     </div>
                     <div>
-                      <%= radio_button_tag(:flight_direction, "arriving") %>
-                      <%= label_tag(:flight_direction_arriving, "Return Flight") %>
+                      <%= radio_button_tag(:flight_direction, "Return", false ,class: "with-gap") %>
+                      <%= label_tag(:flight_direction_Return, "Return Flight") %>
                     </div>
+                    <br>
                     <div>
                       <%= hidden_field_tag :trip_id, params[:trip_id] %> 
                       <%= submit_tag "Add", class: "btn btn-default" %>

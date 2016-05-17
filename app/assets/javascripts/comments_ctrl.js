@@ -11,16 +11,16 @@
     };
 
     $scope.addComment = function(inputText) {
-      var newComment = {
+      var params = {
         text: inputText,
         trip_id: tripId,
         user_id: userId
       };
-      console.log(newComment);
+      console.log(params);
 
-      $http.post('/api/v1/trips/' + tripId + '/comments.json', newComment).then(function(response) {
+      $http.post('/api/v1/trips/' + tripId + '/comments.json', params).then(function(response) {
         console.log(response);
-        $scope.comments.push(newComment);
+        $scope.comments.push(response.data);
         $scope.newText = '';
       }, function(errorResponse) {
         $scope.errors = errorResponse.data.errors;

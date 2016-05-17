@@ -1,18 +1,32 @@
-      <h1>Flight Details</h1>
+<div class="container">      
+      <h1 class="center-align">Flight Details</h1>
 
-      <p>Airline: <%= @flight.airline %></p>
-      <p>Flight Number: <%= @flight.flight_number %></p>
-      <p>Price: <%= @flight.price %> </p>
-      <p>Departing Time: <%= @flight.depart_time %></p>
-      <p>Arriving Time: <%= @flight.arrive_time %></p>
-
-      <div><%= link_to "Edit", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}/edit" %></div>
-      <div><%= link_to "Vote", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?rank=1", method: :patch %></div>
-      <% if current_user.admin %>
-        <div>
-          <%= link_to "Finalize", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?confirmation=confirmed", method: :patch %>
+      <div class="section">
+        <div class="divider"></div>
+        <br>
+        <div style="margin-bottom: 20px">
+          <h4 class="light center-align"><%= @flight.airline %> Flight No. <%= @flight.flight_number %></h4>
         </div>
-          <div>
-          <%= link_to "Delete", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", method: :delete %>
+        <div style="margin-bottom: 20px"> 
+          <h5 class="light center-align">Price: $<%= @flight.price %> </h5>
         </div>
-      <% end %>
+        <div style="margin-bottom: 20px"> 
+          <h5 class="light center-align">Departs: <%= @flight.depart_time.strftime("%b %e, %Y, %l:%M %p")  %></h5>
+        </div>
+        <div style="margin-bottom: 20px"> 
+          <h5 class="light center-align">Arrives: <%= @flight.arrive_time.strftime("%b %e, %Y, %l:%M %p")  %></h5>
+        </div>
+      </div>
+      <div class="row center-align">
+        <button class="waves-effect waves-light btn-flat"><%= link_to "Edit", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}/edit" %></button class="waves-effect waves-light btn-flat">
+        <button class="waves-effect waves-light btn-flat"><%= link_to "Vote", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?rank=1", method: :patch %></button>
+        <% if current_user.admin %>
+          <button class="waves-effect waves-light btn-flat">
+            <%= link_to "Finalize", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}?confirmation=confirmed", method: :patch %>
+          </button>
+            <button class="waves-effect waves-light btn-flat">
+            <%= link_to "Delete", "/trips/#{params[:trip_id]}/flights/#{params[:flight_id]}", method: :delete %>
+          </button>
+        <% end %>
+      </div>
+</div>

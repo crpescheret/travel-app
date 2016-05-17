@@ -1,15 +1,17 @@
-/* global angular */
+/* global angular, tripId */
 
 (function() {
-  angular.module('app').controller('flightsCtrl', function($scope, $http) {
+  angular.module('app').controller('flightsCtrl', function($scope, $http, $window) {
 
     $scope.setup = function() {
       $http.get('/api/v1/flights.json').then(function(response) {
         $scope.flights = response.data;
       });
+      $scope.searchButtonText = "Search";
     };
 
     $scope.searchFlights = function(inputOrigin, inputDestination, inputDate) {
+      $scope.searchButtonText = "Searching...";
       var newSearch = {
         origin: inputOrigin,
         destination: inputDestination,
@@ -17,8 +19,12 @@
       };
       console.log(newSearch);
       $http.post('/api/v1/flights/search', newSearch).then(function(response) {
+        $scope.searchButtonText = "Search";
         console.log(response);
         $scope.results = response.data;
+      }, function(response) {
+        $scope.searchButtonText = "Search";
+        console.log('error', response);
       });
     };
 
@@ -29,7 +35,7 @@
 
     $scope.addFlight = function(inputAirline, inputFlightNumber, inputDeparture, inputArrival, inputPrice, inputOrigin, inputDestination, inputFlightDirection) {
       console.log(inputAirline, inputFlightNumber, inputDeparture, inputArrival, inputPrice, inputFlightDirection);
-      var newFlight = {
+      var params = {
         tripId: tripId,
         airline: inputAirline,
         flightNumber: inputFlightNumber,
@@ -40,9 +46,11 @@
         arriveAirport: inputDestination,
         flightDirection: inputFlightDirection
       };
-      $http.post('/api/v1/flights', newFlight).then(function(response) {
-        console.log(response);
-        $scope.flights.push(newFlight);
+      console.log(params);
+      $http.post('/api/v1/flights', params).then(function(response) {
+        // console.log(response);
+        // $scope.flights.push(params);
+        $window.location.href = '/trips/' + tripId;
       }, function(errorResponse) {
         $scope.errors = errorResponse.data.errors;
       });

@@ -18,6 +18,9 @@ class FlightsController < ApplicationController
       depart_time: params[:depart_time],
       arrive_time: params[:arrive_time],
       flight_direction: params[:flight_direction],
+      depart_airport: params[:depart_airport],
+      arrive_airport: params[:arrive_airport],
+      price: "USD" + params[:price],
       status: "pending",
       trip_id: params[:trip_id],
       rank: 0

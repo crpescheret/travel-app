@@ -9,7 +9,17 @@
         </div>
 
         <div class="row center-align">
-            <h5 class="light"><%= @trip.city %>, <%= @trip.state %>, <%= @trip.country %>   |   <%= @trip.start_date.strftime("%b %d, %Y") %> - <%= @trip.end_date.strftime("%b %d, %Y") %></h5>
+            <h5 class="light">
+              <% if @trip.city != '' %>
+                <%= @trip.city %>, 
+              <% end %>
+              <% if @trip.state != '' %>
+                <%= @trip.state %>, 
+              <% end %>
+              <% if @trip.country != '' %>
+                <%= @trip.country %>
+              <% end %>
+                 |   <%= @trip.start_date.strftime("%b %d, %Y") %> - <%= @trip.end_date.strftime("%b %d, %Y") %></h5>
         </div>
         <div class="container center-align">
           <div class="row center-align">
@@ -49,30 +59,32 @@
 
         <div class="divider"></div>
 
-        <div class="container">
-          <br>
-            <div class="row center-align">
-              <div class="col s3">
-                <button ng-click="changeOrderAttribute('rank')" class="waves-effect waves-light btn-flat">Rank</button>
+        <% if @flight != nil %>
+          <div class="container">
+            <br>
+              <div class="row center-align">
+                <div class="col s3">
+                  <button ng-click="changeOrderAttribute('rank')" class="waves-effect waves-light btn-flat">Rank</button>
+                </div>
+                <div class="col s3">  
+                  <button ng-click="changeOrderAttribute('price')" class="waves-effect waves-light btn-flat">Price</button>
+                </div>
+                <div class="col s3">
+                  <button ng-click="changeOrderAttribute('time')" class="waves-effect waves-light btn-flat">Time</button>
+                </div>
+                <div class="col s3">
+                  <button ng-click="changeOrderAttribute('airline')" class="waves-effect waves-light btn-flat">A-Z</button>
+                </div>
               </div>
-              <div class="col s3">  
-                <button ng-click="changeOrderAttribute('price')" class="waves-effect waves-light btn-flat">Price</button>
-              </div>
-              <div class="col s3">
-                <button ng-click="changeOrderAttribute('time')" class="waves-effect waves-light btn-flat">Time</button>
-              </div>
-              <div class="col s3">
-                <button ng-click="changeOrderAttribute('airline')" class="waves-effect waves-light btn-flat">A-Z</button>
-              </div>
-            </div>
-        </div>
-
+          </div>
+        <% end %> 
 
         <div class="row list-row" >
           <div ng-repeat="flight in flights | orderBy:orderAttribute:orderDescending" class="col s4 card blue-grey lighten-3 " style="height: 250px; width: 300px; margin-left: 20px">
-            <h5 class="card-title black-text">{{ flight.airline }} Flight No.  {{flight.flightNumber}}</h5> 
-            <p>Type: {{flight.date}}</p> 
-            <p>Price: {{flight.price}}</p> 
+            <h5 class="card-title black-text">{{ flight.airline }}{{flight.flightNumber}}</h5> 
+            <p>Date: {{flight.date}}</p> 
+            <p>Price: {{flight.price}}</p>
+            <p>{{ flight.flightDirection }}</p> 
             <div class="card-action">
                 <a href="/trips/<%=@trip.id%>/flights/{{flight.id}}">View</a>
                 <%= link_to "Vote", "/trips/#{@trip.id}/flights/{{flight.id}}?rank=1", method: :patch %>
@@ -96,36 +108,40 @@
       <div class="section">
         <div class="divider"></div>
         <br>
-        <div class="container">
-          <div class="row center-align">
-            <div class="col s3">
-              <button ng-click="changeAccOrderAttribute('rank')" class="waves-effect waves-light btn-flat">Rank</button>
-            </div>
-            <div class="col s3">  
-              <button ng-click="changeAccOrderAttribute('price')" class="waves-effect waves-light btn-flat">Price</button>
-            </div>
-            <div class="col s3">
-              <button ng-click="changeAccOrderAttribute('propertyType')" class="waves-effect waves-light btn-flat">Type</button>
-            </div>
-            <div class="col s3">
-              <button ng-click="changeAccOrderAttribute('name')" class="waves-effect waves-light btn-flat">A-Z</button>
+
+        <% if @accommodation != nil %>
+          <div class="container">
+            <div class="row center-align">
+              <div class="col s3">
+                <button ng-click="changeAccOrderAttribute('rank')" class="waves-effect waves-light btn-flat">Rank</button>
+              </div>
+              <div class="col s3">  
+                <button ng-click="changeAccOrderAttribute('price')" class="waves-effect waves-light btn-flat">Price</button>
+              </div>
+              <div class="col s3">
+                <button ng-click="changeAccOrderAttribute('propertyType')" class="waves-effect waves-light btn-flat">Type</button>
+              </div>
+              <div class="col s3">
+                <button ng-click="changeAccOrderAttribute('name')" class="waves-effect waves-light btn-flat">A-Z</button>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %> 
 
         <div class="row">
           <div ng-repeat="accommodation in accommodations | orderBy:orderAttribute:orderDescending" class="col s4 card blue-grey lighten-3 " style="width: 300px; margin-left: 20px; height: 250px">
             <h5 class="card-title black-text"> {{ accommodation.name }} </h5> 
             <p>Type: {{ accommodation.propertyType }} </p> 
-            <p>Price: {{accommodation.price}}</p> 
+            <p>Price: ${{accommodation.price}} USD</p> 
             <div class="card-action">
               <a href="/trips/<%= @trip.id %>/accommodations/{{accommodation.id}}">View</a>
             </div>
           </div>
-      
-          <div class="col s3 card-panel valign-wrapper" style="height: 250px; width: 300px; margin-left: 20px; background-image: url(/map.png);">
-            <h5 class="card-title black-text valign center-align"><a href="/trips/<%=@trip.id%>/maps">My Map</a></h5>
-          </div>
+          <% if @accommodation != nil %>
+            <div class="col s3 card-panel valign-wrapper" style="height: 250px; width: 300px; margin-left: 20px; background-image: url(/map.png);">
+              <h5 class="card-title black-text valign center-align"><a href="/trips/<%=@trip.id%>/maps">My Map</a></h5>
+            </div>
+          <% end %> 
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ class Api::V1::CommentsController < ApplicationController
       trip_id: params[:trip_id],
       user_id: params[:user_id]
     )
-    @comments = Comment.where(trip_id: params[:trip_id])
-    render "index.json.jbuilder"
+    # @comments = Comment.where(trip_id: params[:trip_id])
+    render "show.json.jbuilder"
   end
 end

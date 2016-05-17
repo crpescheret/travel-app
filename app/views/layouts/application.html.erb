@@ -43,8 +43,6 @@
           <% end %>
           <% if current_user %>
             <li><a href="/groups/new" class="white-text">Add to Trip</a></li>
-            <li><a href="/trips/<%=params[:id]%>/comments" class="white-text">Chat</a></li>
-            <li><a href="/trips/<%=params[:id]%>/itinerary" class="white-text">Itinerary</a></li>
             <li><a href="/users/sign_out" method="delete" class="white-text">Log Out</a></li>
           <% end %>
         </ul>

@@ -1,4 +1,4 @@
-<h2>New Accommodation</h2>
+<h2 class="center-align">Add Accommodation:</h2>
 
   <%= form_tag "/trips/#{params[:trip_id]}/accommodations", {method: :post} do %>
     <div>
@@ -6,19 +6,19 @@
       <%= text_field_tag :name %>
     </div>
     <div>
-      <%= label_tag :property_type %>
-      <%= text_field_tag :property_type %>
+      <%= label_tag :property_type, "Property Type" %>
+      <%= text_field_tag :property_type, nil, placeholder: 'Hotel, AirBnB, VRBO, etc...' %>
     </div>
     <div>
-      <%= label_tag :price %>
+      <%= label_tag :price, "Price (per night)" %>
       <%= text_field_tag :price %>
     </div>
-    <div>
-      <%= label_tag :address %>
-      <%= text_field_tag :address %>
+    <div >
+      <%= label_tag :address, "Property Address"%>
+      <%= text_field_tag "autocomplete", nil, placeholder: 'Enter your address', onFocus: "geolocate()"  %>
     </div>
     <div>
-      <%= label_tag :url %>
+      <%= label_tag :url, "Website" %>
       <%= text_field_tag :url %>
     </div>
     <div>
@@ -26,3 +26,6 @@
       <%= submit_tag "Add", class: "btn btn-default" %>
     </div>
   <% end %>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWODzEDsut0goHvr-1aaBXm40w0o0ojLo&libraries=places&callback=initAutocomplete"
+        async defer></script>

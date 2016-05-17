@@ -50,18 +50,28 @@
                       <h4 class="card-title text-darken-2"><%= trip.title %></h4>
                 </div>
                 <div class="collapsible-body">
-                  <div class="row">
-                    <div class="col s3 center-align">
-                      <p><%= trip.start_date.strftime("%b %d, %Y") %> - <%= trip.end_date.strftime("%b %d, %Y")  %></p>
-                    </div>
-                    <div class="col s3 center-align">
-                      <p><%= trip.city %></p>
-                    </div>
-                    <div class="col s3 center-align">
-                      <p><%= trip.country %></p>
-                    </div>
-                    <div class="col s3 center-align">
-                      <p><a href='trips/<%= trip.id%>'><i class="material-icons center-align">launch</i></a></p>
+                  <div class="container">
+                  <br>
+                    <div class="row">
+                      <div class="col s5 center-align">
+                        <h5 class="center-align">
+                          <% if trip.city !='' %>
+                            <%= trip.city %>, 
+                          <% end %>
+                          <% if trip.state !='' %>
+                            <%= trip.state %>, 
+                          <% end %>
+                          <% if trip.country !='' %>
+                            <%= trip.country %>
+                          <% end %>
+                        </h5>
+                      </div>
+                      <div class="col s5 center-align">
+                        <h5><%= trip.start_date.strftime("%b %d, %Y") %> - <%= trip.end_date.strftime("%b %d, %Y")  %></h5>
+                      </div>
+                      <div class="col s2 center-align">
+                        <p><a href="trips/<%= trip.id%>" class="waves-effect waves-light btn-flat teal accent-1">Details</a></p>
+                      </div>
                     </div>
                   </div>
                 </div>
