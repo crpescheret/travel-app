@@ -5,7 +5,7 @@ class Api::V1::FlightsController < ApplicationController
   end
 
   def show
-    if Flight.where(trip_id: params[:id], status: "confirmed").length > 0 
+    if Flight.where(trip_id: params[:id], status: "confirmed").length == 2 
       @flights = Flight.where(trip_id: params[:id], status: "confirmed")
     else
       @flights = Flight.where(trip_id: params[:id])
@@ -44,10 +44,10 @@ class Api::V1::FlightsController < ApplicationController
       depart_time: params[:departureTime],
       arrive_time: params[:arrivalTime],
       price: params[:price],
-      flight_direction: params[:flightDirecton],
       arrive_airport: params[:arriveAirport],
       depart_airport: params[:departAirport],
       status: "pending",
+      flight_direction: params[:flightDirection],
       rank: 0
     )
     if @flight.save

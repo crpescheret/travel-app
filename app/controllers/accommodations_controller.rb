@@ -21,7 +21,7 @@ class AccommodationsController < ApplicationController
       rank: 0,
       trip_id: params[:trip_id]
     )
-    redirect_to "/trips/#{params[:trip_id]}/accommodations"
+    redirect_to "/trips/#{params[:trip_id]}"
   end
 
   def show
@@ -36,6 +36,7 @@ class AccommodationsController < ApplicationController
   def update
     @accommodation = Accommodation.find_by(id: params[:accommodation_id])
     @rank = @accommodation.rank += params[:rank].to_i
+
     @accommodation.update(
       name: params[:name] || @accommodation.name,
       property_type: params[:property_type] || @accommodation.property_type,
@@ -43,10 +44,10 @@ class AccommodationsController < ApplicationController
       address: params[:address] || @accommodation.address,
       url: params[:url] || @accommodation.url,
       trip_id: params[:trip_id] || @accommodation.trip_id,
-      status: params[:confirmation] || "pending",
+      status: params[:confirmation] || params[:status],
       rank: @rank || @accommodation.rank
     )
-    redirect_to "/trips/#{params[:trip_id]}/accommodations"
+    redirect_to "/trips/#{params[:trip_id]}"
   end
 
   def destroy

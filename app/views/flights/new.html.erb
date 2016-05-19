@@ -14,7 +14,7 @@
                       <form class="col s12">
                         <div class="row">
                           <div class="input-field col s6">
-                            <input id="origin" type="text" ng-model="origin"></input>
+                            <input id="origin" ng-model="origin"class="autocomplete" type="text" name="keyword" placeholder="City name or airport code" />
                             <label for="origin">Origin</label>
                           </div>
                           <div class="input-field col s6">
@@ -57,11 +57,11 @@
                         </div>
                         <div class="row">
                           <div class="col s6 center-align">
-                            <input ng-model="result.flightDirection" name="{{result.$$hashKey}}-flightDirection" type="radio" id="{{result.$$hashKey}}-departure" value="Departure" class="with-gap"/>
+                            <input ng-model="result.flightDirection" name="{{result.$$hashKey}}-flightDirection" type="radio" id="{{result.$$hashKey}}-departure" value="departing" class="with-gap"/>
                             <label for="{{result.$$hashKey}}-departure">Departure Flight</label>
                           </div>
                           <div class="col s6 center-align">
-                            <input ng-model="result.flightDirection" name="{{result.$$hashKey}}-flightDirection" type="radio" id="{{result.$$hashKey}}-return" value="Return" class="with-gap"/>
+                            <input ng-model="result.flightDirection" name="{{result.$$hashKey}}-flightDirection" type="radio" id="{{result.$$hashKey}}-return" value="arriving" class="with-gap"/>
                             <label for="{{result.$$hashKey}}-return">Return Flight</label>
                           </div>
                         </div>

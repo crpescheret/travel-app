@@ -1,7 +1,15 @@
 <script type="text/javascript"6776>var tripId = <%= @trip.id %>;</script>
 
+<div class="parallax-container">
+  <div class="parallax"><img src="/water.jpg" style="opacity: 0.7"></div>
+</div>
+
   <div ng-app="app">
     <div ng-controller="tripsCtrl" ng-init="setup()">
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 m9 l12">
 
       <div class="section">
         <div style="position: relative; height: 80px">
@@ -49,7 +57,7 @@
         <div style="position: relative; height: 80px">
           <h3 class="light center-align">Flights</h3>
             <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
-              <a class="btn-floating btn-large waves-effect teal accent-3" href="/trips/<%= @trip.id %>/flights/new">
+              <a class="btn-floating btn-large waves-effect deep-orange accent-2" href="/trips/<%= @trip.id %>/flights/new">
                 <i class="material-icons center-align">add</i>
               </a>
             </div>
@@ -59,47 +67,55 @@
 
         <div class="divider"></div>
 
-        <% if @flight != nil %>
+        <% if @flight != '' %>
           <div class="container">
             <br>
               <div class="row center-align">
-                <div class="col s3">
+                <div class="col s1" style="width: 130px">
                   <button ng-click="changeOrderAttribute('rank')" class="waves-effect waves-light btn-flat">Rank</button>
                 </div>
-                <div class="col s3">  
+                <div class="col s1" style="width: 130px">  
                   <button ng-click="changeOrderAttribute('price')" class="waves-effect waves-light btn-flat">Price</button>
                 </div>
-                <div class="col s3">
+                <div class="col s1" style="width: 130px">
                   <button ng-click="changeOrderAttribute('time')" class="waves-effect waves-light btn-flat">Time</button>
                 </div>
-                <div class="col s3">
+                <div class="col s1" style="width: 130px">
                   <button ng-click="changeOrderAttribute('airline')" class="waves-effect waves-light btn-flat">A-Z</button>
+                </div>
+                <div class="col s1" style="width: 130px">
+                  <button ng-click="showDirection('departing')" class="waves-effect waves-light btn-flat">Depart</button>
+                </div>
+                <div class="col s1" style="width: 130px">
+                  <button ng-click="showDirection('arriving')" class="waves-effect waves-light btn-flat">Return</button>
+                </div>
+                <div class="col s1" style="width: 130px">
+                  <button ng-click="showDirection()" class="waves-effect waves-light btn-flat">All</button>
                 </div>
               </div>
           </div>
         <% end %> 
 
         <div class="row list-row" >
-          <div ng-repeat="flight in flights | orderBy:orderAttribute:orderDescending" class="col s4 card blue-grey lighten-3 " style="height: 250px; width: 300px; margin-left: 20px">
+          <div ng-repeat="flight in flights | orderBy:orderAttribute:orderDescending | filter: {flightDirection: directionFilter}" class="col s4 card grey lighten-2 fadeIn" style="height: 250px; width: 300px; margin-left: 20px" ng-if="flight.status">
             <h5 class="card-title black-text">{{ flight.airline }}{{flight.flightNumber}}</h5> 
-            <p>Date: {{flight.date}}</p> 
+            <p>Date: {{flight.departTime | date: medium }}</p> 
             <p>Price: {{flight.price}}</p>
-            <p>{{ flight.flightDirection }}</p> 
             <div class="card-action">
-                <a href="/trips/<%=@trip.id%>/flights/{{flight.id}}">View</a>
-                <%= link_to "Vote", "/trips/#{@trip.id}/flights/{{flight.id}}?rank=1", method: :patch %>
+                <a href="/trips/<%=@trip.id%>/flights/{{flight.id}}" class="waves-effect waves-light btn-flat  teal accent-1">View</a>
+                <%= link_to "Vote", "/trips/#{@trip.id}/flights/{{flight.id}}?rank=1", method: :patch, class: "waves-effect waves-light btn-flat  teal accent-1" %>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="divider"></div>
-
       <div class="section">
+      <div class="divider"></div>
+      <br>
         <div style="position: relative; height: 80px">
           <h3 class="light center-align">Accommodations</h3>
             <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; right: 24px;">
-              <a class="btn-floating btn-large waves-effect teal accent-3" href="/trips/<%= @trip.id %>/accommodations/new">
+              <a class="btn-floating btn-large waves-effect deep-orange accent-2" href="/trips/<%= @trip.id %>/accommodations/new">
                 <i class="material-icons center-align">add</i>
               </a>
             </div>
@@ -109,7 +125,7 @@
         <div class="divider"></div>
         <br>
 
-        <% if @accommodation != nil %>
+        <% if @accommodation != '' %>
           <div class="container">
             <div class="row center-align">
               <div class="col s3">
@@ -129,20 +145,30 @@
         <% end %> 
 
         <div class="row">
-          <div ng-repeat="accommodation in accommodations | orderBy:orderAttribute:orderDescending" class="col s4 card blue-grey lighten-3 " style="width: 300px; margin-left: 20px; height: 250px">
+          <div ng-repeat="accommodation in accommodations | orderBy:orderAttribute:orderDescending" class="col s4 card grey lighten-2 fadeIn" style="width: 300px; margin-left: 20px; height: 250px">
             <h5 class="card-title black-text"> {{ accommodation.name }} </h5> 
             <p>Type: {{ accommodation.propertyType }} </p> 
             <p>Price: ${{accommodation.price}} USD</p> 
             <div class="card-action">
-              <a href="/trips/<%= @trip.id %>/accommodations/{{accommodation.id}}">View</a>
+              <a href="/trips/<%= @trip.id %>/accommodations/{{accommodation.id}}" class="waves-effect waves-light btn-flat  teal accent-1">View</a>
+              <%= link_to "Vote", "/trips/#{@trip.id}/accommodations/{{accommodation.id}}?rank=1", method: :patch, class: "waves-effect waves-light btn-flat  teal accent-1" %>
             </div>
           </div>
-          <% if @accommodation != nil %>
-            <div class="col s3 card-panel valign-wrapper" style="height: 250px; width: 300px; margin-left: 20px; background-image: url(/map.png);">
-              <h5 class="card-title black-text valign center-align"><a href="/trips/<%=@trip.id%>/maps">My Map</a></h5>
+          <% if @accommodation != '' %>
+            <div class="col s3 card-panel valign-wrapper" style="height: 250px; width: 300px; margin-left: 20px; padding: 85px; background-image: url(/map.png);">
+              <a href="/trips/<%=@trip.id%>/maps">
+                <h4 class="black-text light center-align">My Map</h4>
+              </a>
             </div>
           <% end %> 
         </div>
       </div>
     </div>
   </div>
+
+</div>
+</div>
+</div>
+<div class="parallax-container">
+  <div class="parallax"><img src="/pool.jpg" style="opacity: 0.7"></div>
+</div>

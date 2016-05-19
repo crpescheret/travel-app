@@ -32,64 +32,38 @@
 
       <body>
         <header>
-
-          <nav class="grey darken-3" role="navigation">
-            <div class="nav-wrapper container">
-              <a href="/trips" class="brand-logo white-text">Travel App</a>
-              <ul class="right hide-on-med-and-down">
+          <nav class="grey darken-3" role="navigation" style="height: 90px">
+            <div class="nav-wrapper" style="height: 90px" >
+              <a href="/trips" class="brand-logo"><img style="height: 90px; margin-left: 20px" src="/white_icon.png"></a>
+              <ul class="right hide-on-med-and-down valign-wrapper" style="height: 90px">
                 <% if current_user == nil %>
                   <li><a href="/users/sign_in" class="white-text">Log In</a></li>
                   <li><a href="/users/sign_up" class="white-text">Sign Up</a></li>
                 <% end %>
                 <% if current_user %>
-                  <li><a href="/groups/new" class="white-text">Add to Trip</a></li>
-                  <li><a href="/users/sign_out" method="delete" class="white-text">Log Out</a></li>
+                  <li><a href="/groups/new" class="white-text btn-flat valign">Add to Trip</a></li>
+                  <li><a href="/users/sign_out" method="delete" class="waves-effect waves-light btn-flat-large teal accent-1">Log Out</a></li>
                 <% end %>
               </ul>
-
-              <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Navbar Link</a></li>
-              </ul>
-              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
           </nav>
         </header>
   
+
         <!--  Scripts-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="/js/materialize.js"></script>
         <script src="/js/init.js"></script>
+
 
         <%= yield %>
 
         <footer class="page-footer grey darken-3">
           <div class="container">
             <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Bio</h5>
-                <p class="grey-text text-lighten-4">XXXXXXX</p>
-
-
-              </div>
-              <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                  <li><a class="white-text" href="#!">Link 1</a></li>
-                  <li><a class="white-text" href="#!">Link 2</a></li>
-                  <li><a class="white-text" href="#!">Link 3</a></li>
-                  <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-              <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                  <li><a class="white-text" href="#!">Link 1</a></li>
-                  <li><a class="white-text" href="#!">Link 2</a></li>
-                  <li><a class="white-text" href="#!">Link 3</a></li>
-                  <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-            </div>
+              <div class="col l6 s12 valign-wrapper">
+                <img src="/white_logo.png" style="height: 125px" class="valign">
+              </div>           
           </div>
         </footer>
 

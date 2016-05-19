@@ -1,8 +1,13 @@
 class TripsController < ApplicationController
   before_action :authenticate_user!
 
+  def home
+    render "home.html.erb", layout: "maps"
+  end
+
   def index
     @trips = current_user.trips
+    render layout: "maps"
   end
 
   def new
@@ -31,7 +36,7 @@ class TripsController < ApplicationController
     @group = Group.find_by(trip_id: params[:id])
     @flight = Flight.find_by(id: params[:flight_id].to_i)
     @accommodation = Accommodation.find_by(id: params[:accommodation_id])
-    render 'show.html.erb'
+    render 'show.html.erb', layout: "maps"
   end
 
   def itinerary

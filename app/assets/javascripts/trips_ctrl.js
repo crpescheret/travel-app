@@ -50,5 +50,9 @@
       }
     };
 
+    $scope.showDirection = function(inputDirection) {
+      $scope.directionFilter = inputDirection;
+    };
+
   });
 })();

@@ -49,7 +49,7 @@ class FlightsController < ApplicationController
       depart_time: params[:depart_time] || @flight.depart_time,
       arrive_time: params[:arrive_time] || @flight.arrive_time,
       flight_direction: params[:flight_direction] || @flight.flight_direction,
-      status: params[:confirmation] || "pending",
+      status: params[:confirmation] || params[:status],
       trip_id: params[:trip_id],
       rank: @rank || @flight.rank
     )

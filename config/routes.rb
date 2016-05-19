@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  get '/' => 'trips#index'
+  get '/' => 'trips#home'
+  get '/home' => 'trips#home'
 
   get '/trips' => 'trips#index'
   get '/trips/new' => 'trips#new'
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
 
   get '/groups/new' => 'groups#new'
   post '/groups' => 'groups#create'
+
 
   namespace :api do
     namespace :v1 do

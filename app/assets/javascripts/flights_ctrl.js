@@ -6,6 +6,7 @@
     $scope.setup = function() {
       $http.get('/api/v1/flights.json').then(function(response) {
         $scope.flights = response.data;
+        
       });
       $scope.searchButtonText = "Search";
     };
@@ -46,6 +47,7 @@
         arriveAirport: inputDestination,
         flightDirection: inputFlightDirection
       };
+
       console.log(params);
       $http.post('/api/v1/flights', params).then(function(response) {
         // console.log(response);
@@ -56,5 +58,6 @@
       });
     };
 
+   
   });
 })();
